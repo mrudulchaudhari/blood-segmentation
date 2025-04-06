@@ -1,11 +1,147 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Blood Analyzer</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Cell Analyzer</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <h1>Blood Cell Analyzer</h1>
-    <p>Welcome to the Blood Cell Analyzer!</p>
+    <header>
+        <div class="container">
+            <h1>Blood Cell Analyzer</h1>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('home') }}" class="active">Home</a></li>
+                    <li><a href="{{ url_for('history') }}">History</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <div class="container">
+            <section class="hero">
+                <h2>Blood Cell Analysis</h2>
+                <p>Upload a blood sample image to detect anemia or leukemia</p>
+            </section>
+            
+            <!-- Display Model Accuracy to Build Trust -->
+            <section class="model-accuracy">
+                <div class="accuracy-card">
+                    <h3>Model Performance Metrics</h3>
+                    <div class="metrics-container">
+                        <div class="metric">
+                            <div class="metric-value">{{ model_metrics.accuracy }}%</div>
+                            <div class="metric-label">Overall Accuracy</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">{{ model_metrics.sensitivity }}%</div>
+                            <div class="metric-label">Sensitivity</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">{{ model_metrics.specificity }}%</div>
+                            <div class="metric-label">Specificity</div>
+                        </div>
+                    </div>
+                    <div class="condition-accuracy">
+                        <h4>Condition Detection Accuracy</h4>
+                        <div class="condition-metrics">
+                            <div class="condition normal">
+                                <span class="condition-name">Normal:</span>
+                                <span class="condition-value">{{ model_metrics.disease_detection_rate.normal }}%</span>
+                            </div>
+                            <div class="condition anemia">
+                                <span class="condition-name">Anemia:</span>
+                                <span class="condition-value">{{ model_metrics.disease_detection_rate.anemia }}%</span>
+                            </div>
+                            <div class="condition leukemia">
+                                <span class="condition-name">Leukemia:</span>
+                                <span class="condition-value">{{ model_metrics.disease_detection_rate.leukemia }}%</span>
+                            </div>
+                        </div>
+                        <div class="model-info">
+                            <p>Validated on {{ model_metrics.validation_samples }} blood samples</p>
+                            <p>Last updated: {{ model_metrics.training_date }}</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="upload-section">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <div class="messages">
+                            {% for message in messages %}
+                                <p class="message">{{ message }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+                
+                <div class="card">
+                    <h3>Upload Blood Sample</h3>
+                    <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+                        <div class="file-upload">
+                            <label for="file">Choose a blood sample image:</label>
+                            <input type="file" name="file" id="file" accept="image/*">
+                            <div id="preview" class="image-preview"></div>
+                        </div>
+                        <button type="submit" class="btn">Analyze Sample</button>
+                    </form>
+                </div>
+            </section>
+            
+            {% if recent_analyses %}
+            <section class="recent-analyses">
+                <h3>Recent Analyses</h3>
+                <div class="analyses-list">
+                    {% for analysis in recent_analyses %}
+                    <div class="analysis-item">
+                        <img src="{{ url_for('static', filename=analysis.image_path) }}" alt="Blood Sample">
+                        <div class="analysis-info">
+                            <h4 class="diagnosis-{{ analysis.diagnosis }}">{{ analysis.diagnosis|capitalize }}</h4>
+                            <p>Confidence: {{ analysis.confidence }}%</p>
+                            <a href="{{ url_for('results', analysis_id=analysis.id) }}" class="btn-sm">View Details</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+            {% endif %}
+            
+            <section class="info-section">
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>About Anemia</h3>
+                        <p>Anemia is a condition characterized by low red blood cell count or reduced hemoglobin. In microscopic analysis, anemic blood typically shows:</p>
+                        <ul>
+                            <li>Reduced number of red blood cells</li>
+                            <li>Pale or smaller red blood cells</li>
+                            <li>Irregular cell distribution</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>About Leukemia</h3>
+                        <p>Leukemia is a type of blood cancer. Under microscopic examination, leukemic blood may show:</p>
+                        <ul>
+                            <li>Abnormal white blood cell shapes</li>
+                            <li>Higher count of immature white blood cells</li>
+                            <li>Irregular cell morphology</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Blood Cell Analyzer</p>
+        </div>
+    </footer>
+    
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
