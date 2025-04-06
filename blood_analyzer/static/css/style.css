@@ -1,10 +1,698 @@
-body {
-    font-family: Arial, sans-serif;
+/* Base styles */
+:root {
+    --primary-color: #3498db;
+    --primary-dark: #2980b9;
+    --normal-color: #2ecc71;
+    --anemia-color: #f39c12;
+    --leukemia-color: #e74c3c;
+    --error-color: #e74c3c;
+    --gray: #6c757d;
+    --light-gray: #f8f9fa;
+    --dark: #343a40;
+    --border-radius: 6px;
+    --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+* {
     margin: 0;
-    padding: 20px;
-    background-color: #f5f7fa;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 1rem;
 }
 
 h1 {
-    color: #3498db;
+    font-size: 2rem;
+}
+
+h2 {
+    font-size: 1.8rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+h4 {
+    font-size: 1.2rem;
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+ul {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Header */
+header {
+    background-color: #fff;
+    box-shadow: var(--box-shadow);
+    padding: 1rem 0;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    color: var(--primary-color);
+    margin: 0;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+}
+
+nav ul li {
+    margin-left: 1.5rem;
+}
+
+nav ul li a {
+    color: var(--dark);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    color: var(--primary-color);
+}
+
+/* Main content */
+main {
+    padding: 2rem 0;
+}
+
+/* Hero section */
+.hero {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    padding: 2.5rem 0;
+    text-align: center;
+    border-radius: var(--border-radius);
+    margin-bottom: 2rem;
+}
+
+.hero h2 {
+    margin-bottom: 0.5rem;
+}
+
+/* Button */
+.btn {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: var(--primary-dark);
+}
+
+.btn-sm {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+}
+
+/* Card */
+.card {
+    background-color: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+/* File upload */
+.file-upload {
+    margin-bottom: 1.5rem;
+}
+
+.file-upload label {
+    display: block;
+    margin-bottom: 0.7rem;
+    font-weight: 500;
+}
+
+.file-upload input[type="file"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+}
+
+.image-preview {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.image-preview img {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: var(--border-radius);
+    border: 1px solid #ddd;
+}
+
+/* Model Accuracy Section */
+.model-accuracy {
+    margin-bottom: 2rem;
+}
+
+.accuracy-card {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 1.5rem;
+}
+
+.accuracy-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.metrics-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1.5rem;
+}
+
+.metric {
+    text-align: center;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    background-color: #f8f9fa;
+    width: 30%;
+}
+
+.metric-value {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.metric-label {
+    color: #6c757d;
+}
+
+.condition-accuracy {
+    border-top: 1px solid #eee;
+    padding-top: 1rem;
+}
+
+.condition-accuracy h4 {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.condition-metrics {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1rem;
+}
+
+.condition {
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+}
+
+.condition.normal {
+    background-color: rgba(46, 204, 113, 0.1);
+    color: var(--normal-color);
+}
+
+.condition.anemia {
+    background-color: rgba(243, 156, 18, 0.1);
+    color: var(--anemia-color);
+}
+
+.condition.leukemia {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: var(--leukemia-color);
+}
+
+.model-info {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-top: 1rem;
+}
+
+/* Recent analyses */
+.analyses-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.analysis-item {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.analysis-item:hover {
+    transform: translateY(-5px);
+}
+
+.analysis-item img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.analysis-info {
+    padding: 1rem;
+}
+
+.analysis-info h4 {
+    margin-bottom: 0.5rem;
+}
+
+.analysis-info p {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.diagnosis-normal {
+    color: var(--normal-color);
+}
+
+.diagnosis-anemia {
+    color: var(--anemia-color);
+}
+
+.diagnosis-leukemia {
+    color: var(--leukemia-color);
+}
+
+/* Info section */
+.info-section {
+    margin-top: 3rem;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.info-card {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 1.5rem;
+}
+
+.info-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+/* Results page */
+.results-section {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.timestamp {
+    text-align: center;
+    color: var(--gray);
+    margin-bottom: 2rem;
+}
+
+.results-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.sample-image, .diagnosis {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 1.5rem;
+}
+
+.sample-image h3, .diagnosis h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.sample-image img {
+    max-width: 100%;
+    border-radius: var(--border-radius);
+    display: block;
+    margin: 0 auto;
+}
+
+.diagnosis-result {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.diagnosis.diagnosis-normal .diagnosis-result {
+    color: var(--normal-color);
+}
+
+.diagnosis.diagnosis-anemia .diagnosis-result {
+    color: var(--anemia-color);
+}
+
+.diagnosis.diagnosis-leukemia .diagnosis-result {
+    color: var(--leukemia-color);
+}
+
+.confidence {
+    margin-bottom: 1.5rem;
+}
+
+.confidence p {
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.confidence-bar {
+    height: 20px;
+    background-color: #e9ecef;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.confidence-value {
+    height: 100%;
+    transition: width 1s ease-out;
+}
+
+.diagnosis-normal .confidence-value {
+    background-color: var(--normal-color);
+}
+
+.diagnosis-anemia .confidence-value {
+    background-color: var(--anemia-color);
+}
+
+.diagnosis-leukemia .confidence-value {
+    background-color: var(--leukemia-color);
+}
+
+.details {
+    margin-bottom: 1.5rem;
+}
+
+.metrics {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1.5rem;
+}
+
+.metric-item {
+    text-align: center;
+}
+
+.metric-item .metric-label {
+    font-size: 0.9rem;
+    color: var(--gray);
+    margin-bottom: 0.3rem;
+}
+
+.metric-item .metric-value {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.recommendation {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    margin-top: 1.5rem;
+}
+
+.recommendation.warning {
+    background-color: rgba(243, 156, 18, 0.1);
+    border-left: 4px solid var(--anemia-color);
+}
+
+.recommendation.urgent {
+    background-color: rgba(231, 76, 60, 0.1);
+    border-left: 4px solid var(--leukemia-color);
+}
+
+/* Model accuracy card on results page */
+.model-accuracy-card {
+    background-color: #f8f9fa;
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-left: 4px solid var(--primary-color);
+}
+
+.model-accuracy-card h3 {
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.accuracy-metrics {
+    margin: 1rem 0;
+}
+
+.accuracy-metric {
+    margin-bottom: 0.5rem;
+}
+
+.accuracy-metric .metric-label {
+    font-weight: 500;
+}
+
+.accuracy-metric .metric-value {
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.accuracy-note {
+    font-size: 0.9rem;
+    border-top: 1px solid #ddd;
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+
+.actions {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+/* History page */
+.history-section {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.history-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.history-card {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.history-card:hover {
+    transform: translateY(-5px);
+}
+
+.history-image {
+    height: 180px;
+    overflow: hidden;
+}
+
+.history-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.history-content {
+    padding: 1.2rem;
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.history-header h3 {
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.diagnosis-normal .history-header h3 {
+    color: var(--normal-color);
+}
+
+.diagnosis-anemia .history-header h3 {
+    color: var(--anemia-color);
+}
+
+.diagnosis-leukemia .history-header h3 {
+    color: var(--leukemia-color);
+}
+
+.history-date {
+    font-size: 0.8rem;
+    color: var(--gray);
+}
+
+.history-metrics {
+    margin-bottom: 1.2rem;
+}
+
+.history-metric {
+    margin-bottom: 0.5rem;
+}
+
+.history-metric .metric-label {
+    font-weight: 500;
+}
+
+.history-actions {
+    text-align: center;
+}
+
+.no-history {
+    text-align: center;
+    padding: 3rem 0;
+}
+
+.no-history p {
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    color: var(--gray);
+}
+
+/* Flash messages */
+.messages {
+    margin-bottom: 1.5rem;
+}
+
+.message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid #f5c6cb;
+    border-radius: var(--border-radius);
+}
+
+/* Footer */
+footer {
+    background-color: var(--dark);
+    color: white;
+    padding: 1.5rem 0;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .metrics-container,
+    .condition-metrics {
+        flex-direction: column;
+        align-items: center;
+    }
+   
+    .metric {
+        width: 80%;
+        margin-bottom: 1rem;
+    }
+   
+    .condition {
+        margin-bottom: 0.8rem;
+    }
+   
+    .results-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    header .container {
+        flex-direction: column;
+    }
+   
+    nav {
+        margin-top: 1rem;
+    }
+   
+    nav ul {
+        justify-content: center;
+    }
+   
+    nav ul li:first-child {
+        margin-left: 0;
+    }
+   
+    .model-accuracy-card,
+    .recommendation {
+        padding: 1rem;
+    }
+   
+    .metrics {
+        flex-direction: column;
+        align-items: center;
+    }
+   
+    .metric-item {
+        margin-bottom: 1rem;
+    }
 }
