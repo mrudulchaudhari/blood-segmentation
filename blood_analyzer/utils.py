@@ -30,3 +30,15 @@ BEST_MODEL_FILE = os.path.join(MODEL_PATH, 'best_model.pkl')
 BEST_MODEL_NAME_FILE = os.path.join(MODEL_PATH, 'best_model_name.txt')
 PREDICTION_CACHE_FILE = os.path.join(CACHE_PATH, 'prediction_cache.json')
 MODEL_METADATA_FILE = os.path.join(MODEL_PATH, 'model_metadata.json')
+
+MODEL_PATH = 'static/models/'
+CACHE_PATH = 'static/cache/'
+RF_MODEL_FILE = os.path.join(MODEL_PATH, 'random_forest_model.pkl')
+GB_MODEL_FILE = os.path.join(MODEL_PATH, 'gradient_boosting_model.pkl')
+SVM_MODEL_FILE = os.path.join(MODEL_PATH, 'svm_model.pkl')
+NN_MODEL_FILE = os.path.join(MODEL_PATH, 'neural_network_model.h5')
+SCALER_FILE = os.path.join(MODEL_PATH, 'scaler.pkl')
+BEST_MODEL_FILE = os.path.join(MODEL_PATH, 'best_model.pkl')
+BEST_MODEL_NAME_FILE = os.path.join(MODEL_PATH, 'best_model_name.txt')
+PREDICTION_CACHE_FILE = os.path.join(CACHE_PATH, 'prediction_cache.json')
+MODEL_METADATA_FILE = os.path.join(MODEL_PATH, 'model_metadata.json')
